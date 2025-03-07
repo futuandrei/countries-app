@@ -1,7 +1,9 @@
-import {useParams} from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { selectAllCountries } from '../store/slices/countriesSlice';
-import {useAppSelector} from '../store/hooks';
-import {Country} from '../types/country';
+import { useAppSelector } from '../store/hooks';
+import { Country } from '../types/country';
+import { CardActionArea, CardActions } from '@mui/material';
+import FavoriteButton from './FavoriteButton';
 
 const CountryDetail = () => {
     const { name } = useParams();
@@ -17,19 +19,24 @@ const CountryDetail = () => {
 
     if (!country) {
         return <div>Country not found</div>;
-      }
+    }
 
     return (
         <div>
             <h1>{country?.name.common}</h1>
             <img src={country?.flags.png} alt={country?.name.common} />
-           <p>Capital: {country?.capital}</p>
-           <p>Region: {country?.region}</p>
+            <p>Capital: {country?.capital}</p>
+            <p>Region: {country?.region}</p>
             <p>Subregion: {country?.subregion}</p>
             <p>Population: {country?.population}</p>
             <p>Currencies: {Object.values(country?.currencies).map((currency) => currency.name).join(', ')}</p>
+            <CardActionArea>
+                <CardActions sx={{ mt: "auto", "justifyContent": 'flex-end' }}>
+                    <FavoriteButton country={country} />
+                </CardActions>
+            </CardActionArea>
         </div>
-    ); 
+    );
 };
 
 export default CountryDetail;

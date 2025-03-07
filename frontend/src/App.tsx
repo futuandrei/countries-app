@@ -30,21 +30,31 @@ function App() {
             <Route path="/login"
               element={
                 <>
-                <AuthRedirect/>
-                <Login />
+                  <AuthRedirect />
+                  <Login />
                 </>
               }
             />
             <Route path="/test" element={<TestData />} />
             <Route path="/countries" element={<CountriesList />} />
-            <Route path="/favorites" element={<Favorites />} />
             <Route path="/countries/:name" element={<CountryDetail />} />
+            {/* <Route path="/favorites" element={<Favorites />} /> */}
             <Route
               path="/protected"
               element={
                 <ProtectedRoute>
                   <>
-                  <ProtectedTestData/>
+                    <ProtectedTestData />
+                  </>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/favorites"
+              element={
+                <ProtectedRoute>
+                  <>
+                    <Favorites />
                   </>
                 </ProtectedRoute>
               }
