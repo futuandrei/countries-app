@@ -19,11 +19,21 @@ export const Navigation = () => {
           Countries
         </Button>
         {user && (
-          <Button color="inherit" component={RouterLink} to="/favorites" startIcon={<Favorite />}>
+          <Button
+            color="inherit"
+            component={RouterLink}
+            to="/favorites"
+            startIcon={<Favorite />}
+          >
             Favorites
           </Button>
         )}
-        <Button color="inherit" component={RouterLink} to="/protected" startIcon={<Lock />}></Button>
+        <Button
+          color="inherit"
+          component={RouterLink}
+          to="/protected"
+          startIcon={<Lock />}
+        ></Button>
         {user ? (
           <Button color="inherit" onClick={signOut}>
             Logout ({user.email})
