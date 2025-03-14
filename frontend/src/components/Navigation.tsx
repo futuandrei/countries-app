@@ -33,7 +33,9 @@ export const Navigation = () => {
           component={RouterLink}
           to="/protected"
           startIcon={<Lock />}
-        ></Button>
+        >
+          Protected data
+        </Button>
         {user ? (
           <Button color="inherit" onClick={signOut}>
             Logout ({user.email})
