@@ -2,10 +2,12 @@ import LocationCityIcon from "@mui/icons-material/LocationCity";
 import Payments from "@mui/icons-material/Payments";
 import PeopleIcon from "@mui/icons-material/People";
 import PublicIcon from "@mui/icons-material/Public";
+import RecordVoiceOverIcon from "@mui/icons-material/RecordVoiceOver";
 import {
   Box,
   Card,
   CardActionArea,
+  CardActions,
   CardContent,
   CardMedia,
   Typography,
@@ -13,6 +15,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { Country } from "../types/country";
 import { Link as RouterLink } from "react-router-dom";
+import FavoriteButton from "./FavoriteButton";
 
 interface CountryCardProps {
   country: Country;
@@ -27,6 +30,11 @@ export const CountryCard = ({ country }: CountryCardProps) => {
     return Object.values(country.currencies)
       .map((currency) => `${currency.name} (${currency.symbol})`)
       .join(", ");
+  };
+
+  const getLanguages = () => {
+    if (!country.languages) return "N/A";
+    return Object.values(country.languages).join(", ");
   };
 
   return (
@@ -70,6 +78,13 @@ export const CountryCard = ({ country }: CountryCardProps) => {
             </Typography>
           </Box>
 
+          <Box sx={{ display: "flex", gap: 1, alignItems: "center", mb: 1 }}>
+            <RecordVoiceOverIcon color="action" fontSize="small" />
+            <Typography variant="body2" color="text.secondary" noWrap>
+              {getLanguages()}
+            </Typography>
+          </Box>
+
           <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
             <Payments color="action" fontSize="small" />
             <Typography variant="body2" color="text.secondary" noWrap>
@@ -78,6 +93,9 @@ export const CountryCard = ({ country }: CountryCardProps) => {
           </Box>
         </CardContent>
       </CardActionArea>
+      <CardActions sx={{ mt: "auto", justifyContent: "flex-start" }}>
+        <FavoriteButton country={country} />
+      </CardActions>
     </Card>
   );
 };

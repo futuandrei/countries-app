@@ -33,9 +33,11 @@ const CountriesList = () => {
   return (
     <div>
       <h1>Countries</h1>
-      <Search searchQuery={searchQuery} onSearchChange={handleSearchChange} />
-      {loading && <p>Loading...</p>}
-      {error && <p>Error: {error}</p>}
+      <div className="search-container">
+        <Search searchQuery={searchQuery} onSearchChange={handleSearchChange} />
+        {loading && <p>Loading...</p>}
+        {error && <p>Error: {error}</p>}
+      </div>
       <div className="cards">
         {filteredCountries.map((country) => (
           <CountryCard key={country.cca3} country={country} />

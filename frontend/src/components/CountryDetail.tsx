@@ -1,8 +1,8 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { selectAllCountries } from "../store/slices/countriesSlice";
 import { useAppSelector } from "../store/hooks";
 import { Country } from "../types/country";
-import { CardActionArea, CardActions } from "@mui/material";
+import { CardActionArea, CardActions, Button } from "@mui/material";
 import FavoriteButton from "./FavoriteButton";
 import LocationCityIcon from "@mui/icons-material/LocationCity";
 import PublicIcon from "@mui/icons-material/Public";
@@ -11,6 +11,7 @@ import Payments from "@mui/icons-material/Payments";
 
 const CountryDetail = () => {
   const { name } = useParams();
+  const navigate = useNavigate();
   // const params = useParams();
   // console.log(params);
   const countries = useAppSelector(selectAllCountries);
@@ -27,8 +28,18 @@ const CountryDetail = () => {
     return <div>Country not found</div>;
   }
 
+  const getLanguages = () => {
+    if (!country.languages) return "N/A";
+    return Object.values(country.languages).join(", ");
+  };
+
   return (
     <div>
+      <div>
+        <Button variant="contained" onClick={() => navigate(-1)}>
+          Back
+        </Button>
+      </div>
       <img src={country?.flags.png} alt={country?.name.common} />
       <h1>{country?.name.common}</h1>
       <p>
@@ -45,17 +56,19 @@ const CountryDetail = () => {
         Population: {country?.population}
       </p>
       <p>
+        <PeopleIcon color="action" fontSize="small" />
+        Language: {getLanguages()}
+      </p>
+      <p>
         <Payments color="action" fontSize="small" />
         Currencies:{" "}
         {Object.values(country?.currencies)
           .map((currency) => currency.name)
           .join(", ")}
       </p>
-      <CardActionArea>
-        <CardActions sx={{ mt: "auto", justifyContent: "flex-start" }}>
-          <FavoriteButton country={country} />
-        </CardActions>
-      </CardActionArea>
+      <CardActions sx={{ mt: "auto", justifyContent: "flex-start" }}>
+        <FavoriteButton country={country} />
+      </CardActions>
     </div>
   );
 };
