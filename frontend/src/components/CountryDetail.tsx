@@ -52,7 +52,7 @@ const CountryDetail = () => {
           .join(", ")}
       </p>
       <CardActionArea>
-        <CardActions sx={{ mt: "auto", justifyContent: "flex-end" }}>
+        <CardActions sx={{ mt: "auto", justifyContent: "flex-start" }}>
           <FavoriteButton country={country} />
         </CardActions>
       </CardActionArea>
