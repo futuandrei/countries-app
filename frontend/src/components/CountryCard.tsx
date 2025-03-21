@@ -22,8 +22,8 @@ interface CountryCardProps {
 }
 
 export const CountryCard = ({ country }: CountryCardProps) => {
-  const navigate = useNavigate();
-  const urlName = encodeURIComponent(country.name.common.toLowerCase());
+  // const navigate = useNavigate();
+  // const urlName = encodeURIComponent(country.name.common.toLowerCase());
 
   const getCurrencies = () => {
     if (!country.currencies) return "N/A";

@@ -4,7 +4,6 @@ import {
   fetchAllCountries,
   selectAllCountries,
 } from "../store/slices/countriesSlice";
-import { Link } from "react-router-dom";
 // import {CountryDetail} from "../types/country";
 import "./CountriesList.css";
 import CountryCard from "./CountryCard";
