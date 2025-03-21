@@ -27,7 +27,8 @@ function App() {
 
           {/* Routes */}
           <Routes>
-            <Route path="/login"
+            <Route
+              path="/login"
               element={
                 <>
                   <AuthRedirect />
