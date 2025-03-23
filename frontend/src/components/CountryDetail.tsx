@@ -11,6 +11,7 @@ import Payments from "@mui/icons-material/Payments";
 import { weatherApi, WeatherData } from "../api/services/weather";
 import { useEffect, useState } from "react";
 import { Box, Typography } from "@mui/material";
+import WikiInfo from "./WikiInfo";
 
 const CountryDetail = () => {
   const { name } = useParams();
@@ -58,33 +59,36 @@ const CountryDetail = () => {
       </div>
       <img src={country?.flags.png} alt={country?.name.common} />
       <h1>{country?.name.common}</h1>
-      <p>
+      <Box display="flex" alignItems="center" gap={1}>
         {" "}
         <LocationCityIcon color="action" fontSize="small" />
         Capital: {country?.capital}
-      </p>
-      <p>
+      </Box>
+      <Box display="flex" alignItems="center" gap={2}>
         <PublicIcon color="action" fontSize="small" />
         Region: {country?.region}
-      </p>
-      <p>
+      </Box>
+      <Box display="flex" alignItems="center" gap={2}>
         <PeopleIcon color="action" fontSize="small" />
         Population: {country?.population}
-      </p>
-      <p>
+      </Box>
+      <Box display="flex" alignItems="center" gap={2}>
         <PeopleIcon color="action" fontSize="small" />
         Language: {getLanguages()}
-      </p>
-      <p>
+      </Box>
+      <Box display="flex" alignItems="center" gap={2}>
         <Payments color="action" fontSize="small" />
         Currencies:{" "}
         {Object.values(country?.currencies)
           .map((currency) => currency.name)
           .join(", ")}
-      </p>
-      <CardActions sx={{ mt: "auto", justifyContent: "flex-start" }}>
+      </Box>
+      <Box display="flex" alignItems="center" gap={1}>
         <FavoriteButton country={country} />
-      </CardActions>
+        <Typography variant="body2">Add to Favorites</Typography>
+      </Box>
+      <WikiInfo countryName={country.name.common} />
+
       <Box sx={{ mt: 3 }}>
         <Typography variant="h6">Weather in {country?.capital}</Typography>
         {loadingWeather && <p>Loading weather...</p>}
