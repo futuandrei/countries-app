@@ -11,21 +11,14 @@ import CountriesList from "./components/CountriesList";
 import CountryDetail from "./components/CountryDetail";
 import Favorites from "./components/Favorites";
 import { ThemeProvider, CssBaseline } from "@mui/material";
+import { getTheme } from "./theme/theme"; // instead of importing a static 'theme'
 import { createTheme } from "@mui/material/styles";
 import { useMemo, useState } from "react";
 
 function App() {
   const [mode, setMode] = useState<"light" | "dark">("light");
 
-  const theme = useMemo(
-    () =>
-      createTheme({
-        palette: {
-          mode,
-        },
-      }),
-    [mode]
-  );
+  const theme = useMemo(() => getTheme(mode), [mode]);
 
   const toggleTheme = () => {
     setMode((prev) => (prev === "light" ? "dark" : "light"));

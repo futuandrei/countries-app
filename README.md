@@ -1,13 +1,27 @@
 # Countries Fullstack
 
-A full-stack application with NestJS backend and React frontend.
+A Country full-stack application. Running country list alone, requires frontend only. Running supabase backend with test data requires running backend.
+
+## Country app features:
+
+- Authentication (Google Cloud)
+- View countries
+- View country basic details (Rest Country API):
+  - Capital
+  - Region, eg. Europe
+  - Population
+  - Language
+  - Currencies
+- Viewing country additional, wikipedia details (Wikipedia API)
+- Adding country to favorite
+- Viewing country weather info (Openweather API)
 
 ## Project Structure
 
 ```shell
 project-root/
-├── backend/   # NestJS application
-└── frontend/  # React application
+├── backend/   # NestJS application (Supabase)
+└── frontend/  # React application (Countries)
 ```
 
 ## Prerequisites

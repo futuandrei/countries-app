@@ -38,17 +38,29 @@ export const CountryCard = ({ country }: CountryCardProps) => {
   };
 
   return (
-    <Card sx={{ maxWidth: 345, height: "100%" }}>
+    <Card
+      sx={{
+        maxWidth: 345,
+        height: "100%",
+        borderRadius: 5,
+        // border: "1px solid",
+        borderColor: "divider",
+        boxShadow: "none",
+      }}
+    >
       <CardActionArea
         component={RouterLink}
         to={`/countries/${country.name.common}`}
       >
-        <CardMedia
-          component="img"
-          height="140"
-          image={country.flags.png}
-          alt={country.flags.alt || `Flag of ${country.name.common}`}
-        />
+        <Box sx={{ p: 2 }}>
+          <CardMedia
+            component="img"
+            height="140"
+            image={country.flags.png}
+            alt={country.flags.alt || `Flag of ${country.name.common}`}
+            sx={{ borderRadius: 2 }}
+          />
+        </Box>
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
             {country.name.common}
