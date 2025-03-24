@@ -10,60 +10,65 @@ import ProtectedTestData from "./components/ProtectedTestData";
 import CountriesList from "./components/CountriesList";
 import CountryDetail from "./components/CountryDetail";
 import Favorites from "./components/Favorites";
+import { ThemeProvider, CssBaseline } from "@mui/material";
+import { getTheme } from "./theme/theme"; // instead of importing a static 'theme'
+import { createTheme } from "@mui/material/styles";
+import { useMemo, useState } from "react";
 
 function App() {
-  return (
-    <AuthProvider>
-      <BrowserRouter>
-        <Box sx={{ p: 0 }}>
-          {/* Basic navigation */}
-          <Navigation />
-          <Box sx={{ mb: 3 }}>
-            {/* <Link to="/" style={{ marginRight: "1rem" }}>
-              Home
-            </Link> */}
-            {/* <Link to="/test">Test Data</Link> */}
-          </Box>
+  const [mode, setMode] = useState<"light" | "dark">("light");
 
-          {/* Routes */}
-          <Routes>
-            <Route
-              path="/login"
-              element={
-                <>
-                  <AuthRedirect />
-                  <Login />
-                </>
-              }
-            />
-            <Route path="/test" element={<TestData />} />
-            <Route path="/countries" element={<CountriesList />} />
-            <Route path="/countries/:name" element={<CountryDetail />} />
-            {/* <Route path="/favorites" element={<Favorites />} /> */}
-            <Route
-              path="/protected"
-              element={
-                <ProtectedRoute>
+  const theme = useMemo(() => getTheme(mode), [mode]);
+
+  const toggleTheme = () => {
+    setMode((prev) => (prev === "light" ? "dark" : "light"));
+  };
+
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <AuthProvider>
+        <BrowserRouter>
+          <Box sx={{ p: 0 }}>
+            <Navigation toggleTheme={toggleTheme} />
+            <Routes>
+              <Route
+                path="/login"
+                element={
                   <>
-                    <ProtectedTestData />
+                    <AuthRedirect />
+                    <Login />
                   </>
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/favorites"
-              element={
-                <ProtectedRoute>
-                  <>
-                    <Favorites />
-                  </>
-                </ProtectedRoute>
-              }
-            />
-          </Routes>
-        </Box>
-      </BrowserRouter>
-    </AuthProvider>
+                }
+              />
+              <Route path="/test" element={<TestData />} />
+              <Route path="/countries" element={<CountriesList />} />
+              <Route path="/countries/:name" element={<CountryDetail />} />
+              <Route
+                path="/protected"
+                element={
+                  <ProtectedRoute>
+                    <>
+                      <ProtectedTestData />
+                    </>
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/favorites"
+                element={
+                  <ProtectedRoute>
+                    <>
+                      <Favorites />
+                    </>
+                  </ProtectedRoute>
+                }
+              />
+            </Routes>
+          </Box>
+        </BrowserRouter>
+      </AuthProvider>
+    </ThemeProvider>
   );
 }
 

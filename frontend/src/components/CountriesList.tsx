@@ -25,13 +25,15 @@ const CountriesList = () => {
     setSearchQuery(event.target.value);
   };
 
-  const filteredCountries = countries.filter((country) =>
-    country.name.common.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const filteredCountries = countries
+    .filter((country) =>
+      country.name.common.toLowerCase().includes(searchQuery.toLowerCase())
+    )
+    .sort((a, b) => a.name.common.localeCompare(b.name.common));
 
   return (
     <div>
-      <h1>Countries</h1>
+      <h1 style={{ paddingLeft: "8px" }}>Countries</h1>
       <div className="search-container">
         <Search searchQuery={searchQuery} onSearchChange={handleSearchChange} />
         {loading && <p>Loading...</p>}
